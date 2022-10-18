@@ -12,6 +12,7 @@ public class AutoUpdater extends GitHubAPI {
 	public static void update() throws JSONException, IOException {
 		AutoUpdater autoUpdater = new AutoUpdater();
 		File currentFile = new File(System.getProperty("java.class.path"));
+		
 		if (autoUpdater.isUpdateAviable()) {
 			autoUpdater.downloadFileFromURL(autoUpdater.getLatestDownloadURL(), currentFile);
 			

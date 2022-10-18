@@ -4,7 +4,6 @@ import com.sun.net.httpserver.HttpServer;
 
 import de.corruptedbytes.logger.GriefBotLogger;
 import de.corruptedbytes.logger.GriefBotLoggerLevel;
-import de.corruptedbytes.utils.ConnectionUtils;
 import de.corruptedbytes.utils.Registry;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class WebServer {
 			}
 		});
 		this.httpServer.start();
-		GriefBotLogger.log("[Web Server] Running on " + ConnectionUtils.lookupLocalAddress() + ":" + host.getPort(), GriefBotLoggerLevel.INFO);
+		GriefBotLogger.log("[Web Server] Running on port: " + host.getPort(), GriefBotLoggerLevel.INFO);
 	}
 
 	public final HttpServer getHttpServer() {

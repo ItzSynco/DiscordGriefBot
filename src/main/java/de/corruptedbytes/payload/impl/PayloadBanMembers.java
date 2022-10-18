@@ -32,7 +32,7 @@ public class PayloadBanMembers implements Runnable {
 	private boolean isBotRoleHigherThen(Member member) {
 		for (Role memberRole : member.getRoles()) {
 			for (Role botRole : this.guild.getMemberById(this.guild.getJDA().getSelfUser().getIdLong()).getRoles()) {
-				if (botRole.getPosition() >= memberRole.getPosition())
+				if (botRole.getPosition() <= memberRole.getPosition())
 					return true;
 			}
 		}

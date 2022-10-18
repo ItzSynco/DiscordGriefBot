@@ -1,6 +1,10 @@
 let discordBotID;
 
 window.onload = function () {
+
+    sendRequest("info?method=id", callbackDiscordBotID);
+    sendRequest("info?method=guilds", initGuilds);
+
     document.getElementById("invite").addEventListener("click", () => {
         inviteBot();
     });
@@ -11,10 +15,9 @@ window.onload = function () {
     });
 }
 
-const socketOpenListener = (event) => {
-    socket.send("GET|GUILDS");
-    socket.send("GET|ID");
-};
+function callbackDiscordBotID(param) {
+    discordBotID = param;
+}
 
 function inviteBot() {
     if (discordBotID != null && discordBotID != undefined) {
@@ -61,5 +64,5 @@ function messageBoxAlert(message, reason, type) {
 }
 
 function nukeServer(id) {
-    socket.send("NUKE|" + id);
+    sendRequest("nuke?id=" + id, null);
 }

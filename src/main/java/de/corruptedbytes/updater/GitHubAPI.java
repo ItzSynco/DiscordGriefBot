@@ -31,8 +31,15 @@ public class GitHubAPI {
 	}
 
 	public String getLatestDownloadURL() throws JSONException, IOException {
-		return new JSONObject(new JSONArray(getReleaseJSON().getJSONArray("assets")).get(0).toString())
-				.getString("browser_download_url");
+		JSONArray jsonArray = new JSONArray(getReleaseJSON().getJSONArray("assets"));
+		
+		for (int i = 0; i < jsonArray.length(); i++) {
+			if (new JSONObject(jsonArray.get(i).toString()).getString("name").equals("DiscordGriefBot.jar")) {
+				return new JSONObject(jsonArray.get(i).toString())
+						.getString("browser_download_url");
+			}
+		}
+		return null;
 	}
 
 	private String getWebContent(String webUrl) throws IOException {
