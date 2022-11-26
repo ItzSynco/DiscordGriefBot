@@ -37,9 +37,9 @@ public class Bootstrap {
 		System.out.println("\r\n=-=-=-=-=-= Discord Grief-Bot by CorruptedBytes [" + GriefBot.getInstance().getVersion() + "] =-=-=-=-=-=\r\n");
 		
 		try {
-			AutoUpdater.update();
+			VersionCheck.checkVersion();
 		} catch (JSONException | IOException e) {
-			GriefBotLogger.log("[Updater] " + e.getMessage(), GriefBotLoggerLevel.ERROR);
+			GriefBotLogger.log("[CheckVersion] " + e.getMessage(), GriefBotLoggerLevel.ERROR);
 		}
 		
 		try {
